@@ -1,0 +1,11 @@
+  <div><label for="Email">Email:</label></div>
+  <input id="email" type="text" name="email" th:value="*{email}" />
+  <span class="formError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email</span>
+
+  <div><label for="Password">Password:</label></div>
+  <input id="Password" type="text" name="Password" th:value="*{Password}" />
+  <span class="formError" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}">Invalid Password</span>
+
+  <div><label for="PasswordConfirm">PasswordConfirm:</label></div>
+  <input id="PasswordConfirm" type="text" name="PasswordConfirm" th:value="*{PasswordConfirm}" />
+  <span class="formError" th:if="${#fields.hasErrors('PasswordConfirm')}" th:errors="*{PasswordConfirm}">Invalid password confirmation</span>

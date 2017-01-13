@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+  <title>Register</title>
+</head>
+
+<body>
+
+<header th:replace="layout :: site-header" />
+
+<h1>Register in the Blog</h1>
+
+<form method="post" th:object="${registerForm}">
+
+  <div><label for="Username">Username:</label></div>
+  <input type="text" th:field="*{username}" />
+  <span class="formError" th:if="${#fields.hasErrors('username')}" th:errors="username">Invalid Username</span>
+
+  <div><label for="Email">Email:</label></div>
+  <input type="text" th:field="*{email}" />
+  <span class="formError" th:if="${#fields.hasErrors('email')}" th:errors="email">Invalid Email</span>
+  
+  <div><label for="Password">Password:</label></div>
+  <input type="text" th:field="*{password}" />
+  <span class="formError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid Password</span>
+  
+  <div><label for="PasswordConfirm">Confirm Password:</label></div>
+  <input type="text" th:field="*{passwordConfirm}" />
+  <span class="formError" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Invalid Password Confirmation</span>
+
+
+  <div><input type="submit" value="Register"/></div>
+</form>
+
+<footer th:replace="layout :: site-footer" />
+
+</body>
+
+</html>
