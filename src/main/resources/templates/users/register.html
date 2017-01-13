@@ -15,11 +15,11 @@
 
   <div><label for="Username">Username:</label></div>
   <input type="text" th:field="*{username}" />
-  <span class="formError" th:if="${#fields.hasErrors('username')}" th:errors="username">Invalid Username</span>
+  <span class="formError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Invalid Username</span>
 
   <div><label for="Email">Email:</label></div>
   <input type="text" th:field="*{email}" />
-  <span class="formError" th:if="${#fields.hasErrors('email')}" th:errors="email">Invalid Email</span>
+  <span class="formError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid Email</span>
   
   <div><label for="Password">Password:</label></div>
   <input type="text" th:field="*{password}" />
