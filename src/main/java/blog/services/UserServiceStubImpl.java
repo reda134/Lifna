@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
+import blog.forms.validation.EmailExistsException;
 import blog.models.User;
 
 @Service
@@ -43,5 +44,11 @@ public class UserServiceStubImpl implements UserService {
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User registerNewUserAccount(User userDto) throws EmailExistsException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

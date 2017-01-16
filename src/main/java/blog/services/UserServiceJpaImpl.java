@@ -6,7 +6,9 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import blog.forms.validation.EmailExistsException;
 import blog.models.User;
 import blog.repository.UserRepository;
 
@@ -41,6 +43,27 @@ public class UserServiceJpaImpl implements UserService {
 	public void deleteById(Long id) {
 		this.userRepo.delete(id);
 	}
+	
+	@Transactional
+    @Override
+    public User registerNewUserAccount(User userDto) throws EmailExistsException {
+         
+        if (emailExist(userDto.getEmail())) {  
+            throw new EmailExistsException("There is an account with that email adress: " +  userDto.getEmail());
+        }
+        
+        userRepo.save(userDto);
+        
+        return userDto;
+
+    }
+    private boolean emailExist(String email) {
+        User user = userRepo.findByEmail(email);
+        if (user != null) {
+            return true;
+        }
+        return false;
+    }
 
 	@Override
 	public boolean authenticate(String username, String password) {

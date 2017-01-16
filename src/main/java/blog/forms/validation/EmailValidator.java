@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
+ 
 public class EmailValidator 
 implements ConstraintValidator<ValidEmail, String> {
    

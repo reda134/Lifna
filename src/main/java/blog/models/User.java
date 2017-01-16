@@ -29,6 +29,9 @@ public class User
 	@Column(length = 100)
 	private String fullName;
 	
+	@Column(length = 100)
+	private String email;
+	
 	@OneToMany(mappedBy = "author")
 	private Set<Post> posts = new HashSet<>();
 	
