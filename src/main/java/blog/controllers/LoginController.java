@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import blog.forms.LoginForm;
+import blog.formsdata.LoginFormData;
 import blog.services.NotificationService;
 import blog.services.UserService;
 
@@ -23,13 +23,13 @@ public class LoginController
     private NotificationService notifyService;
 
     @RequestMapping("/users/login")
-    public String login(LoginForm loginForm)
+    public String login(LoginFormData loginForm)
     {
 	return "users/login";
     }
 
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
-    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult)
+    public String loginPage(@Valid LoginFormData loginForm, BindingResult bindingResult)
     {
 	if (bindingResult.hasErrors())
 	{

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import blog.forms.validation.EmailExistsException;
+import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
 import blog.repository.UserRepository;
 

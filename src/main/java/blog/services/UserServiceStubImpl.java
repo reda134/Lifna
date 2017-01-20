@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
-import blog.forms.validation.EmailExistsException;
+import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
 
 @Service

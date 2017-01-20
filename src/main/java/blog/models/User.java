@@ -24,17 +24,11 @@ public class User
     private String username;
 
     @Column(length = 100)
-    private String fullName;
-
-    @Column(length = 100)
     private String email;
 
     @Column(length = 60)
     private String password;
-
-    @Column(length = 60)
-    private String passwordConfirm;
-
+    
     /*
      * @ManyToMany(mappedBy = "role") private Set<Role> roles;
      */
@@ -53,6 +47,6 @@ public class User
     @Override
     public String toString()
     {
-	return "User{" + "id=" + id + ", username='" + username + '\'' + '\'' + ", fullName='" + fullName + '\'' + '}';
+	return "User{" + "id=" + id + ", username='" + username + '\'' + '\'' + ", fullName='" + '\'' + '}';
     }
 }

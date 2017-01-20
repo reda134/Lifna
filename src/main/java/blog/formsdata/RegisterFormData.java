@@ -1,11 +1,11 @@
-package blog.forms;
+package blog.formsdata;
 
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import blog.forms.validation.PasswordMatches;
-import blog.forms.validation.ValidEmail;
+import blog.formsdata.validation.PasswordMatches;
+import blog.formsdata.validation.ValidEmail;
 import blog.models.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @PasswordMatches
-public class RegisterForm
+public class RegisterFormData
 {
 
     @NotEmpty

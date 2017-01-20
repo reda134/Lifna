@@ -2,7 +2,7 @@ package blog.services;
 
 import java.util.List;
 
-import blog.forms.validation.EmailExistsException;
+import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
 
 public interface UserService

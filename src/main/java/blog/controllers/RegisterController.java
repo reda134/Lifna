@@ -11,8 +11,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import blog.forms.RegisterForm;
-import blog.forms.validation.EmailExistsException;
+import blog.formsdata.RegisterFormData;
+import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
 import blog.services.NotificationService;
 import blog.services.UserService;
@@ -28,13 +28,13 @@ public class RegisterController
     private UserService userService;
 
     @RequestMapping("/users/register")
-    public String register(RegisterForm registerForm)
+    public String register(RegisterFormData registerForm)
     {
 	return "users/register";
     }
 
     @RequestMapping(value = "/users/register", method = RequestMethod.POST)
-    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
+    public String registerPage(@Valid RegisterFormData registerForm, BindingResult bindingResult)
     {
 	User userDto = new User();
 	if (!bindingResult.hasErrors())
@@ -58,7 +58,7 @@ public class RegisterController
 	return "redirect:/";
     }
 
-    private User createUserAccount(RegisterForm registerForm, BindingResult result)
+    private User createUserAccount(RegisterFormData registerForm, BindingResult result)
     {
 	User registered = null;
 	try
