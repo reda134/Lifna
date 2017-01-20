@@ -19,33 +19,37 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "posts")
-public class Post {
-	
-	public Post()
-	{
-		
-	}
-	public Post(long l, String title, String body, User user) {
-		this.id = l;
-		this.title = title;
-		this.body = body;
-		this.author = user;
-	}
+public class Post
+{
 
-	@Id
+    public Post()
+    {
+
+    }
+
+    public Post(long l, String title, String body, User user)
+    {
+	this.id = l;
+	this.title = title;
+	this.body = body;
+	this.author = user;
+    }
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+    private Long id;
+
     @Column(nullable = false, length = 300)
-	private String title;
-    
-    @Lob @Column(nullable = false)
-	private String body;
-    
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-	private User author;
-    
+    private String title;
+
+    @Lob
     @Column(nullable = false)
-	private Date date = new Date();
+    private String body;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User author;
+
+    @Column(nullable = false)
+    private Date date = new Date();
 
 }

@@ -14,49 +14,52 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
-public class User 
-{	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(nullable = false, length = 30, unique = true)
-	private String username;
-	
-	@Column(length = 100)
-	private String fullName;
-	
-	@Column(length = 100)
-	private String email;
-	
-	@OneToMany(mappedBy = "author")
-	private Set<Post> posts = new HashSet<>();
-	
-	@Column(length = 60)
+public class User
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 30, unique = true)
+    private String username;
+
+    @Column(length = 100)
+    private String fullName;
+
+    @Column(length = 100)
+    private String email;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Post> posts = new HashSet<>();
+
+    @Column(length = 60)
     private String password;
-	
-	@Column(length = 60)
+
+    @Column(length = 60)
     private String passwordConfirm;
-	
-/*	@ManyToMany(mappedBy = "role")
-    private Set<Role> roles;*/
 
+    /*
+     * @ManyToMany(mappedBy = "role") private Set<Role> roles;
+     */
 
-	public User() {
-	}
+    public User()
+    {
+    }
 
-	public User(Long id, String username, String password) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-	}
+    public User(Long id, String username, String password)
+    {
+	this.id = id;
+	this.username = username;
+	this.password = password;
+    }
 
-	@Override
-	public String toString() {
-		return "User{" + "id=" + id + ", username='" + username + '\''  + '\''
-				+ ", fullName='" + fullName + '\'' + '}';
-	}
+    @Override
+    public String toString()
+    {
+	return "User{" + "id=" + id + ", username='" + username + '\'' + '\'' + ", fullName='" + fullName + '\'' + '}';
+    }
 }

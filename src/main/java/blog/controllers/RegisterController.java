@@ -18,47 +18,56 @@ import blog.services.NotificationService;
 import blog.services.UserService;
 
 @Controller
-public class RegisterController {
+public class RegisterController
+{
 
     @Autowired
     private NotificationService notifyService;
-    
+
     @Autowired
     private UserService userService;
-    
-	@RequestMapping("/users/register")
-	public String register(RegisterForm registerForm) {
-		return "users/register";
-	}
-	
-    @RequestMapping(value = "/users/register", method = RequestMethod.POST)
-    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult) {
-    	User userDto = new User();
-        if (!bindingResult.hasErrors()) {
-        	userDto = createUserAccount(registerForm, bindingResult);
-        }
-        if (userDto == null) {
-        	bindingResult.addError(new ObjectError("email", "Duplicate email"));
-        }
-        if (bindingResult.hasErrors()) {
-             List<ObjectError> list =  bindingResult.getGlobalErrors();
-             for (ObjectError o : list)
-            	 notifyService.addErrorMessage(o.getDefaultMessage());
-            	 
-             return "users/register";
-        }
 
-        notifyService.addInfoMessage("Registration successful");
-        return "redirect:/";
+    @RequestMapping("/users/register")
+    public String register(RegisterForm registerForm)
+    {
+	return "users/register";
     }
-    
-    private User createUserAccount(RegisterForm registerForm, BindingResult result) {
-        User registered = null;
-        try {
-            registered = userService.registerNewUserAccount(registerForm.getUserDto());
-        } catch (EmailExistsException e) {
-            return null;
-        }    
-        return registered;
+
+    @RequestMapping(value = "/users/register", method = RequestMethod.POST)
+    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
+    {
+	User userDto = new User();
+	if (!bindingResult.hasErrors())
+	{
+	    userDto = createUserAccount(registerForm, bindingResult);
+	}
+	if (userDto == null)
+	{
+	    bindingResult.addError(new ObjectError("email", "Duplicate email"));
+	}
+	if (bindingResult.hasErrors())
+	{
+	    List<ObjectError> list = bindingResult.getGlobalErrors();
+	    for (ObjectError o : list)
+		notifyService.addErrorMessage(o.getDefaultMessage());
+
+	    return "users/register";
+	}
+
+	notifyService.addInfoMessage("Registration successful");
+	return "redirect:/";
+    }
+
+    private User createUserAccount(RegisterForm registerForm, BindingResult result)
+    {
+	User registered = null;
+	try
+	{
+	    registered = userService.registerNewUserAccount(registerForm.getUserDto());
+	} catch (EmailExistsException e)
+	{
+	    return null;
+	}
+	return registered;
     }
 }

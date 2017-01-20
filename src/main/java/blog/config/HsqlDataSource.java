@@ -11,16 +11,18 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Profile("hsql")
 @Configuration
-public class HsqlDataSource {
+public class HsqlDataSource
+{
 
-	//jdbc:hsqldb:mem:testdb
-	@Bean
-	public DataSource dataSource() {
-		
-		// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL).addScript("db/insert-data.sql").build();
-		return db;
-	}
+    // jdbc:hsqldb:mem:testdb
+    @Bean
+    public DataSource dataSource()
+    {
+
+	// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
+	EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+	EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL).addScript("db/insert-data.sql").build();
+	return db;
+    }
 
 }

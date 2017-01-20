@@ -16,25 +16,27 @@ import blog.services.PostService;
 import blog.services.UserService;
 
 @Controller
-public class HomeController {
-	@Autowired
-	private PostService postService;
-	
-	@Autowired
-	private UserService userService;
+public class HomeController
+{
+    @Autowired
+    private PostService postService;
 
-	@RequestMapping("/")
-	public String index(Model model) {
-		String password = "yassmina2";
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		User user = new User(1L, "reda", hashedPassword);
-		userService.create(user);
-		postService.create(new Post(1, "sdsd", "sdf", user));
-		List<Post> latest5Posts = postService.findLatest5();
-		model.addAttribute("latest5posts", latest5Posts);
-		List<Post> latest3Posts = latest5Posts.stream().limit(3).collect(Collectors.toList());
-		model.addAttribute("latest3posts", latest3Posts);
-		return "index";
-	}
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/")
+    public String index(Model model)
+    {
+	String password = "yassmina2";
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	String hashedPassword = passwordEncoder.encode(password);
+	User user = new User(1L, "reda", hashedPassword);
+	userService.create(user);
+	postService.create(new Post(1, "sdsd", "sdf", user));
+	List<Post> latest5Posts = postService.findLatest5();
+	model.addAttribute("latest5posts", latest5Posts);
+	List<Post> latest3Posts = latest5Posts.stream().limit(3).collect(Collectors.toList());
+	model.addAttribute("latest3posts", latest3Posts);
+	return "index";
+    }
 }

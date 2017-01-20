@@ -12,34 +12,28 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder bCryptPasswordEncoder()
+    {
+	return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	http
-    	.csrf().disable();
-        http
-                .authorizeRequests()
-                    .antMatchers("/**","/resources/**", "/users/register").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/users/login")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .permitAll();
+    protected void configure(HttpSecurity http) throws Exception
+    {
+	http.csrf().disable();
+	http.authorizeRequests().antMatchers("/**", "/resources/**", "/users/register").permitAll().anyRequest()
+		.authenticated().and().formLogin().loginPage("/users/login").permitAll().and().logout().permitAll();
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
+    {
+	auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

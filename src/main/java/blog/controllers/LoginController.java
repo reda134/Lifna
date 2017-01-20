@@ -13,35 +13,39 @@ import blog.services.NotificationService;
 import blog.services.UserService;
 
 @Controller
-public class LoginController {
+public class LoginController
+{
 
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private NotificationService notifyService;
 
     @RequestMapping("/users/login")
-    public String login(LoginForm loginForm) 
+    public String login(LoginForm loginForm)
     {
-        return "users/login";
+	return "users/login";
     }
 
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
-    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-             notifyService.addErrorMessage("Please fill the form correctly!");
-             return "users/login";
-        }
+    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult)
+    {
+	if (bindingResult.hasErrors())
+	{
+	    notifyService.addErrorMessage("Please fill the form correctly!");
+	    return "users/login";
+	}
 
-        if (!userService.authenticate(
+	if (!userService.authenticate(
 
-             loginForm.getUsername(), loginForm.getPassword())) {
-             notifyService.addErrorMessage("Invalid login!");
-             return "users/login";
-        }
+		loginForm.getUsername(), loginForm.getPassword()))
+	{
+	    notifyService.addErrorMessage("Invalid login!");
+	    return "users/login";
+	}
 
-        notifyService.addInfoMessage("Login successful");
-        return "redirect:/";
+	notifyService.addInfoMessage("Login successful");
+	return "redirect:/";
     }
 }

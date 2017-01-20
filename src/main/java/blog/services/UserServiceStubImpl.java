@@ -9,46 +9,54 @@ import blog.forms.validation.EmailExistsException;
 import blog.models.User;
 
 @Service
-public class UserServiceStubImpl implements UserService {
+public class UserServiceStubImpl implements UserService
+{
     @Override
-    public boolean authenticate(String username, String password) {
-         // Provide a sample password check: username == password
-         return Objects.equals(username, password);
+    public boolean authenticate(String username, String password)
+    {
+	// Provide a sample password check: username == password
+	return Objects.equals(username, password);
     }
 
-	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<User> findAll()
+    {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	@Override
-	public User findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public User findById(Long id)
+    {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	@Override
-	public User create(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public User create(User user)
+    {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	@Override
-	public User edit(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public User edit(User user)
+    {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void deleteById(Long id)
+    {
+	// TODO Auto-generated method stub
 
-	@Override
-	public User registerNewUserAccount(User userDto) throws EmailExistsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    }
+
+    @Override
+    public User registerNewUserAccount(User userDto) throws EmailExistsException
+    {
+	// TODO Auto-generated method stub
+	return null;
+    }
 }
