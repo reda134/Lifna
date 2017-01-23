@@ -4,6 +4,7 @@ import java.util.List;
 
 import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
+import blog.models.VerificationToken;
 
 public interface UserService
 {
@@ -20,4 +21,10 @@ public interface UserService
     User edit(User user);
 
     void deleteById(Long id);
+
+    void createVerificationToken(User user, String token);
+    
+    VerificationToken getVerificationToken(String VerificationToken);
+
+    User getUser(String verificationToken);
 }

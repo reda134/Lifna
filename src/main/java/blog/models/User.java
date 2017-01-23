@@ -29,6 +29,9 @@ public class User
     @Column(length = 60)
     private String password;
     
+    @Column(name = "enabled")
+    private boolean enabled;
+    
     /*
      * @ManyToMany(mappedBy = "role") private Set<Role> roles;
      */
@@ -42,6 +45,7 @@ public class User
 	this.id = id;
 	this.username = username;
 	this.password = password;
+	this.enabled = false;
     }
 
     @Override

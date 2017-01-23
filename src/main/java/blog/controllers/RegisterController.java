@@ -5,11 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import blog.formsdata.RegisterFormData;
 import blog.formsdata.validation.EmailExistsException;
@@ -27,6 +31,9 @@ public class RegisterController
     @Autowired
     private UserService userService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+
     @RequestMapping("/users/register")
     public String register(RegisterFormData registerForm)
     {
@@ -34,7 +41,8 @@ public class RegisterController
     }
 
     @RequestMapping(value = "/users/register", method = RequestMethod.POST)
-    public String registerPage(@Valid RegisterFormData registerForm, BindingResult bindingResult)
+    public String registerPage(@Valid RegisterFormData registerForm, BindingResult bindingResult, WebRequest request,
+	    Errors errors)
     {
 	User userDto = new User();
 	if (!bindingResult.hasErrors())
@@ -45,6 +53,16 @@ public class RegisterController
 	{
 	    bindingResult.addError(new ObjectError("email", "Duplicate email"));
 	}
+
+	try
+	{
+	    String appUrl = request.getContextPath();
+	    eventPublisher.publishEvent(new OnRegistrationCompleteEvent(userDto, request.getLocale(), appUrl));
+	} catch (Exception me)
+	{
+	    bindingResult.addError(new ObjectError("email", "Cannot send verification email"));
+	}
+
 	if (bindingResult.hasErrors())
 	{
 	    List<ObjectError> list = bindingResult.getGlobalErrors();

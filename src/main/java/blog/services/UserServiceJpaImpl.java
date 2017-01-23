@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import blog.formsdata.validation.EmailExistsException;
 import blog.models.User;
+import blog.models.VerificationToken;
 import blog.repository.UserRepository;
+import blog.repository.VerificationTokenRepository;
 
 @Service
 @Primary
@@ -19,6 +21,9 @@ public class UserServiceJpaImpl implements UserService
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
 
     @Override
     public List<User> findAll()
@@ -81,5 +86,25 @@ public class UserServiceJpaImpl implements UserService
     {
 	// Provide a sample password check: username == password
 	return Objects.equals(username, password);
+    }
+
+    @Override
+    public void createVerificationToken(User user, String token)
+    {
+	VerificationToken myToken = new VerificationToken(token, user);
+	tokenRepository.save(myToken);
+    }
+
+    @Override
+    public User getUser(String verificationToken)
+    {
+	User user = tokenRepository.findByToken(verificationToken).getUser();
+	return user;
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String VerificationToken)
+    {
+	return tokenRepository.findByToken(VerificationToken);
     }
 }
